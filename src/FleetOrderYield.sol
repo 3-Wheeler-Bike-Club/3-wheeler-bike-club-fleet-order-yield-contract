@@ -113,8 +113,6 @@ contract FleetOrderYield is AccessControl, ReentrancyGuard {
     error TokenAlreadySet();
     /// @notice Thrown when the user does not have enough tokens
     error NotEnoughTokens();
-    /// @notice Thrown when the native token is not accepted
-    error NoNativeTokenAccepted();
     /// @notice Thrown when the amount is invalid
     error PaidFullAmount();
     /// @notice Thrown when the status is invalid
@@ -528,10 +526,6 @@ contract FleetOrderYield is AccessControl, ReentrancyGuard {
         tokenContract.safeTransfer(to, amount);
         emit FleetManagementServiceFeeWithdrawn(token, to, amount);
     }
-
-    
-    receive() external payable { revert NoNativeTokenAccepted(); }
-    fallback() external payable { revert NoNativeTokenAccepted(); }
     
     // =================================================== ADMIN MANAGEMENT ====================================================
 
